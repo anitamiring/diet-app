@@ -24,9 +24,13 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -119,6 +123,50 @@
           }
         }
       }
-    }},
-  "defaultProject": "diet-app"
+    },
+    "fdc-client": {
+      "projectType": "library",
+      "root": "projects/fdc-client",
+      "sourceRoot": "projects/fdc-client/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/fdc-client/tsconfig.lib.json",
+            "project": "projects/fdc-client/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/fdc-client/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/fdc-client/src/test.ts",
+            "tsConfig": "projects/fdc-client/tsconfig.spec.json",
+            "karmaConfig": "projects/fdc-client/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/fdc-client/tsconfig.lib.json",
+              "projects/fdc-client/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "diet-app",
+  "cli": {
+    "analytics": false
+  }
 }
