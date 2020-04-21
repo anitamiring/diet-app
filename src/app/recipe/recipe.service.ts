@@ -16,8 +16,8 @@ export class RecipeService {
       .get<{ message: string; recipes: Recipe[] }>(
         "http://localhost:3000/api/recipes"
       )
-      .subscribe(postData => {
-        this.recipes = postData.recipes;
+      .subscribe(recipeData => {
+        this.recipes = recipeData.recipes;
         this.recipesUpdated.next([...this.recipes]);
       });
   }
@@ -29,7 +29,7 @@ export class RecipeService {
   addRecipe(title: string, content: string) {
     const recipe: Recipe = { id: null, title: title, content: content };
     this.http
-      .post<{ message: string }>("http://localhost:3000/api/recipe", recipe)
+      .post<{ message: string }>("http://localhost:3000/api/recipes", recipe)
       .subscribe(responseData => {
         console.log(responseData.message);
         this.recipes.push(recipe);
