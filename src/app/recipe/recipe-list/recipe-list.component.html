@@ -1,0 +1,20 @@
+<div class="row" *ngIf="recipes.length > 0">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-10 card-group">
+    <div class="col-sm-4" *ngFor="let recipe of recipes">
+      <div class="card">
+        <h4> {{ recipe.title }}</h4>
+        <hr>
+        <p>{{ recipe.content }}</p>
+        <hr>
+        <button type="button" class="btn btn-primary">EDIT</button>
+        <button type="button" class="btn btn-danger">DELETE</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-1"></div>
+
+</div>
+
+<p *ngIf="recipes.length <= 0">No recipes added yet!</p>
+
