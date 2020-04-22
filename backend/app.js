@@ -1,7 +1,14 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
+
+const Recipe = require("./models/recipe");
 
 const app = express();
+
+mongoose.connect("mongodb+srv://Swizzle:zVu5hjp3ORpa2oVD@cluster0-wmqz8.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true } )
+  .then(() => console.log('Connected!'))
+  .catch(() => console.log('Failed to connect!'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,29 +27,34 @@ app.use((req, res, next) => {
 });
 
 app.post("/api/recipes", (req, res, next) => {
-  const post = req.body;
-  console.log(post);
-  res.status(201).json({
-    message: 'Recipe added successfully'
+  const recipe = new Recipe({
+    title: req.body.title,
+    content: req.body.content
+  });
+  recipe.save().then( createdRecipe => {
+    res.status(201).json({
+      message: 'Recipe added successfully',
+      recipeId: createdRecipe._id
+    });
   });
 });
 
 app.get("/api/recipes", (req, res, next) => {
-  const recipes = [
-    {
-      id: "fadf12421l",
-      title: "First server-side post",
-      content: "This is coming from the server"
-    },
-    {
-      id: "ksajflaj132",
-      title: "Second server-side post",
-      content: "This is coming from the server!"
-    }
-  ];
-  res.status(200).json({
-    message: "Recipes fetched successfully!",
-    recipes: recipes
+  Recipe.find()
+    .then(documents => {
+      res.status(200).json({
+        message: "Recipes fetched successfully!",
+        recipes: documents
+      });
+    });
+});
+
+app.delete("/api/recipes/:id", (req, res, next) => {
+  Recipe.deleteOne({ _id: req.params.id }).then( result => {
+    console.log(result);
+    res.status(200).json({
+      message: "Recipe deleted!"
+    });
   });
 });
 

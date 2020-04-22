@@ -8,7 +8,7 @@
         <p>{{ recipe.content }}</p>
         <hr>
         <button type="button" class="btn btn-primary">EDIT</button>
-        <button type="button" class="btn btn-danger">DELETE</button>
+        <button type="button" class="btn btn-danger" (click)="onDelete(recipe.id)">DELETE</button>
       </div>
     </div>
   </div>
