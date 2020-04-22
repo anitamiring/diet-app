@@ -1,20 +1,33 @@
 <div class="row" *ngIf="recipes.length > 0">
   <div class="col-sm-1"></div>
-  <div class="col-sm-10 card-group">
-    <div class="col-sm-4" *ngFor="let recipe of recipes">
-      <div class="card">
-        <h4> {{ recipe.title }}</h4>
-        <hr>
-        <p>{{ recipe.content }}</p>
-        <hr>
-        <button type="button" class="btn btn-primary">EDIT</button>
-        <button type="button" class="btn btn-danger" (click)="onDelete(recipe.id)">DELETE</button>
+  <div class="col-sm-10 mt-3">
+    <div class="card-columns">
+      <div>
+        <div class="card" *ngFor="let recipe of recipes">
+          <h4> {{ recipe.title }}</h4>
+          <hr>
+          <p>{{ recipe.content }}</p>
+          <hr>
+          <a type="button" class="btn btn-primary" [routerLink]="['./edit', recipe.id]">EDIT</a>
+          <button type="button" class="btn btn-danger" (click)="onDelete(recipe.id)">DELETE</button>
+        </div>
       </div>
     </div>
   </div>
+
   <div class="col-sm-1"></div>
 
 </div>
 
 <p *ngIf="recipes.length <= 0">No recipes added yet!</p>
+<hr>
+<div class="row">
+  <div class="col-sm-9"></div>
+  <div class="col-sm-2">
+    <button type="button" class="btn btn-primary" routerLink="/create">Add recipe</button>
+  </div>
+  <div class="col-sm-1"></div>
+</div>
+
+
 

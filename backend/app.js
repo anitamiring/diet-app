@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 
-const Recipe = require("./models/recipe");
+const recipesRoutes = require("./routes/recipes");
 
 const app = express();
 
@@ -21,41 +21,13 @@ app.use((req, res, next) => {
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, DELETE, OPTIONS"
+    "GET, POST, PATCH, DELETE, OPTIONS, PUT"
   );
   next();
 });
 
-app.post("/api/recipes", (req, res, next) => {
-  const recipe = new Recipe({
-    title: req.body.title,
-    content: req.body.content
-  });
-  recipe.save().then( createdRecipe => {
-    res.status(201).json({
-      message: 'Recipe added successfully',
-      recipeId: createdRecipe._id
-    });
-  });
-});
+app.use("/api/recipes", recipesRoutes);
 
-app.get("/api/recipes", (req, res, next) => {
-  Recipe.find()
-    .then(documents => {
-      res.status(200).json({
-        message: "Recipes fetched successfully!",
-        recipes: documents
-      });
-    });
-});
 
-app.delete("/api/recipes/:id", (req, res, next) => {
-  Recipe.deleteOne({ _id: req.params.id }).then( result => {
-    console.log(result);
-    res.status(200).json({
-      message: "Recipe deleted!"
-    });
-  });
-});
 
 module.exports = app;

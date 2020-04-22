@@ -2,15 +2,17 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
 import { map } from "rxjs/operators";
+import { Router } from '@angular/router';
 
 import { Recipe } from "./recipe.model";
+
 
 @Injectable({ providedIn: "root" })
 export class RecipeService {
   private recipes: Recipe[] = [];
   private recipesUpdated = new Subject<Recipe[]>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getRecipes() {
     this.http
@@ -36,6 +38,10 @@ export class RecipeService {
     return this.recipesUpdated.asObservable();
   }
 
+  getRecipe(id: string) {
+    return this.http.get<{_id:string, title:string, content:string }>("http://localhost:3000/api/recipes/" + id);
+  }
+
   addRecipe(title: string, content: string) {
     const recipe: Recipe = { id: null, title: title, content: content };
     this.http
@@ -46,6 +52,21 @@ export class RecipeService {
         console.log(responseData.message);
         this.recipes.push(recipe);
         this.recipesUpdated.next([...this.recipes]);
+        this.router.navigate(["/"]);
+      });
+  }
+
+  updateRecipe(id: string, title: string, content: string) {
+    const recipe: Recipe = {id: id, title: title, content: content};
+    this.http
+      .put("http://localhost:3000/api/recipes/" + id, recipe)
+      .subscribe( (res) => {
+        const updatedRecipes = [...this.recipes];
+        const oldRecipeIndex = updatedRecipes.findIndex(rec => rec.id === recipe.id);
+        updatedRecipes[oldRecipeIndex] = recipe;
+        this.recipes = updatedRecipes;
+        this.recipesUpdated.next([...this.recipes]);
+        this.router.navigate(["/"]);
       });
   }
 

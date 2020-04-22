@@ -3,14 +3,14 @@
   <div class="col-sm-8">
     <div class="card">
       <div class="card-body">
-        <form (submit)="onAddRecipe(recipeForm)" #recipeForm="ngForm">
+        <form (submit)="onSaveRecipe(recipeForm)" #recipeForm="ngForm">
           <div class="form-group">
             <label for="exampleInputEmail1">Recipe title</label>
             <input
               type="text"
               class="form-control"
               name="title"
-              ngModel
+              [ngModel]="recipe?.title"
               required
               minLength="3"
               placeholder="Recipe title"
@@ -23,7 +23,7 @@
                 class="form-control"
                 rows="4"
                 name="content"
-                ngModel
+                [ngModel]="recipe?.content"
                 required
                 id="validationTextarea"
                 placeholder="Recipe description"
@@ -45,6 +45,6 @@
   <div class="col-sm-2"></div>
 </div>
 
-<app-recipe-list></app-recipe-list>
+
 
 
