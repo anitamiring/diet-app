@@ -6,6 +6,7 @@
         <div class="card" *ngFor="let recipe of recipes">
           <h4> {{ recipe.title }}</h4>
           <hr>
+          <img class="card-img-top" [src]="recipe.imagePath" [alt]="recipe.title">
           <p>{{ recipe.content }}</p>
           <hr>
           <a type="button" class="btn btn-primary" [routerLink]="['./edit', recipe.id]">EDIT</a>

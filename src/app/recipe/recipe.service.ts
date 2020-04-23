@@ -24,7 +24,8 @@ export class RecipeService {
           return {
             title: recipe.title,
             content: recipe.content,
-            id: recipe._id
+            id: recipe._id,
+            imagePath: recipe.imagePath
           }
         })
       }))
@@ -39,30 +40,56 @@ export class RecipeService {
   }
 
   getRecipe(id: string) {
-    return this.http.get<{_id:string, title:string, content:string }>("http://localhost:3000/api/recipes/" + id);
+    return this.http.get<{_id:string, title:string, content:string, imagePath: string }>("http://localhost:3000/api/recipes/" + id);
   }
 
-  addRecipe(title: string, content: string) {
-    const recipe: Recipe = { id: null, title: title, content: content };
+  addRecipe(title: string, content: string, image: File) {
+    const recipeData = new FormData();
+    recipeData.append("title", title);
+    recipeData.append("content", content);
+    recipeData.append("image", image, title);
     this.http
-      .post<{ message: string, recipeId: string }>("http://localhost:3000/api/recipes", recipe)
+      .post<{ message: string, recipe: Recipe }>("http://localhost:3000/api/recipes", recipeData)
       .subscribe(responseData => {
-        const recipeId = responseData.recipeId;
-        recipe.id = recipeId;
-        console.log(responseData.message);
+        const recipe: Recipe = {
+          id: responseData.recipe.id,
+          title: title,
+          content: content,
+          imagePath: responseData.recipe.imagePath
+        };
         this.recipes.push(recipe);
         this.recipesUpdated.next([...this.recipes]);
         this.router.navigate(["/"]);
       });
   }
 
-  updateRecipe(id: string, title: string, content: string) {
-    const recipe: Recipe = {id: id, title: title, content: content};
+  updateRecipe(id: string, title: string, content: string, image: File | string) {
+    let recipeData: Recipe | FormData;
+    if (typeof image === "object") {
+      recipeData = new FormData();
+      recipeData.append("id", id);
+      recipeData.append("title", title);
+      recipeData.append("content", content);
+      recipeData.append("image", image, title);
+    } else {
+      recipeData = {
+        id: id,
+        title: title,
+        content: content,
+        imagePath: image
+      };
+    }
     this.http
-      .put("http://localhost:3000/api/recipes/" + id, recipe)
+      .put("http://localhost:3000/api/recipes/" + id, recipeData)
       .subscribe( (res) => {
         const updatedRecipes = [...this.recipes];
-        const oldRecipeIndex = updatedRecipes.findIndex(rec => rec.id === recipe.id);
+        const oldRecipeIndex = updatedRecipes.findIndex(rec => rec.id === id);
+        const recipe: Recipe = {
+          id: id,
+          title: title,
+          content: content,
+          imagePath: ""
+        };
         updatedRecipes[oldRecipeIndex] = recipe;
         this.recipes = updatedRecipes;
         this.recipesUpdated.next([...this.recipes]);
