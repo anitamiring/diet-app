@@ -9,17 +9,17 @@ import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component'
 
 
 const routes: Routes = [
-  { path: '', component: RecipeComponent },
   { path: 'ingredient', component: IngredientComponent},
   { path: 'recipes', component: RecipeListComponent},
   { path: 'create', component: RecipeCreateComponent },
   { path: 'recipes/edit/:recipeId', component: RecipeCreateComponent },
-  { path: 'planner', component: RecipeComponent },
+  { path: 'planner', loadChildren: () => import(`./planner/planner.module`).then(m => m.PlannerModule) },
+  { path: '', component: RecipeComponent },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, { enableTracing: false })
   ],
   exports: [
     RouterModule

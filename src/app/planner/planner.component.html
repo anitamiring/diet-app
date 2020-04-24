@@ -1,0 +1,193 @@
+<div class = "row">
+  <div class="col-sm-1"></div>
+  <div class="col-12 col-sm-10 d-flex justify-content-center">
+    <h4>Monday, 1500 kcal</h4>
+  </div>
+  <div class="col-sm-1"></div>
+</div>
+
+<div class = "row">
+  <div class="col-sm-1"></div>
+  <div class="col-12 col-sm-10 d-flex justify-content-center">
+    <p> P: 0g, C: 0g, F: 0g </p>
+  </div>
+  <div class="col-sm-1"></div>
+</div>
+<hr>
+
+
+<nav mat-tab-nav-bar mat-align-tabs="center">
+  <a mat-tab-link
+     *ngFor="let link of navLinks"
+     [routerLink]="[link.path]"
+     routerLinkActive #rla="routerLinkActive">
+    {{link.label}}
+  </a>
+</nav>
+
+
+<router-outlet></router-outlet>
+
+<!--
+
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Breakfast">
+
+  </mat-tab>
+  <mat-tab label="Snack">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-1"></div>
+          <div class="col-sm-5">
+            <img class="card-img-top" [src]="recipe.imagePath" [alt]="recipe.title">
+          </div>
+          <div class="col-sm-5">
+            <h4>Cheesecake, 500 kcal</h4>
+            <p>P: 0g, F: 0g, C:0g</p>
+            <table matSort (matSortChange)="sortData($event)" class="caloriesTable">
+              <tr>
+                <th mat-sort-header="name" class="caloriesRow">Dessert (100g)</th>
+                <th mat-sort-header="calories" class="caloriesRow">Calories</th>
+                <th mat-sort-header="fat" class="caloriesRow">Fat (g)</th>
+                <th mat-sort-header="carbs" class="caloriesRow">Carbs (g)</th>
+                <th mat-sort-header="protein" class="caloriesRow">Protein (g)</th>
+              </tr>
+              <mat-divider></mat-divider>
+              <tr *ngFor="let dessert of sortedData">
+                <td>{{dessert.name}}</td>
+                <td>{{dessert.calories}}</td>
+                <td>{{dessert.fat}}</td>
+                <td>{{dessert.carbs}}</td>
+                <td>{{dessert.protein}}</td>
+              </tr>
+              <mat-divider></mat-divider>
+            </table>
+            <p class="card-text">
+              Cupcake ipsum dolor sit amet. Liquorice gummi bears jelly beans. Macaroon biscuit lollipop soufflé.
+
+              Pastry danish liquorice dessert toffee chocolate cake donut carrot cake cake. Dragée halvah chocolate bar jujubes muffin brownie halvah. Cookie oat cake pie tiramisu.
+
+              Gingerbread macaroon oat cake. Cupcake pudding tart brownie icing toffee brownie icing chocolate bar. Sweet roll bonbon macaroon chocolate bar.</p>
+              <button type="button" class="btn btn-secondary">Add recipe to calendar</button>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Lunch">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-1"></div>
+          <div class="col-sm-5">
+            <img class="card-img-top" [src]="recipe.imagePath" [alt]="recipe.title">
+          </div>
+          <div class="col-sm-5">
+            <h4>Cheesecake, 500 kcal</h4>
+            <p>P: 0g, F: 0g, C:0g</p>
+            <table matSort (matSortChange)="sortData($event)" class="caloriesTable">
+              <tr>
+                <th mat-sort-header="name" class="caloriesRow">Dessert (100g)</th>
+                <th mat-sort-header="calories" class="caloriesRow">Calories</th>
+                <th mat-sort-header="fat" class="caloriesRow">Fat (g)</th>
+                <th mat-sort-header="carbs" class="caloriesRow">Carbs (g)</th>
+                <th mat-sort-header="protein" class="caloriesRow">Protein (g)</th>
+              </tr>
+              <mat-divider></mat-divider>
+              <tr *ngFor="let dessert of sortedData">
+                <td>{{dessert.name}}</td>
+                <td>{{dessert.calories}}</td>
+                <td>{{dessert.fat}}</td>
+                <td>{{dessert.carbs}}</td>
+                <td>{{dessert.protein}}</td>
+              </tr>
+              <mat-divider></mat-divider>
+            </table>
+            <p class="card-text">
+              Cupcake ipsum dolor sit amet. Liquorice gummi bears jelly beans. Macaroon biscuit lollipop soufflé.
+
+              Pastry danish liquorice dessert toffee chocolate cake donut carrot cake cake. Dragée halvah chocolate bar jujubes muffin brownie halvah. Cookie oat cake pie tiramisu.
+
+              Gingerbread macaroon oat cake. Cupcake pudding tart brownie icing toffee brownie icing chocolate bar. Sweet roll bonbon macaroon chocolate bar.</p>
+              <button type="button" class="btn btn-secondary">Add recipe to calendar</button>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Snack">
+
+  </mat-tab>
+  <mat-tab label="Dinner">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-1"></div>
+          <div class="col-sm-5">
+            <img class="card-img-top" [src]="recipe.imagePath" [alt]="recipe.title">
+          </div>
+          <div class="col-sm-5">
+            <h4>Cheesecake, 500 kcal</h4>
+            <p>P: 0g, F: 0g, C:0g</p>
+            <table matSort (matSortChange)="sortData($event)" class="caloriesTable">
+              <tr>
+                <th mat-sort-header="name" class="caloriesRow">Dessert (100g)</th>
+                <th mat-sort-header="calories" class="caloriesRow">Calories</th>
+                <th mat-sort-header="fat" class="caloriesRow">Fat (g)</th>
+                <th mat-sort-header="carbs" class="caloriesRow">Carbs (g)</th>
+                <th mat-sort-header="protein" class="caloriesRow">Protein (g)</th>
+              </tr>
+              <mat-divider></mat-divider>
+              <tr *ngFor="let dessert of sortedData">
+                <td>{{dessert.name}}</td>
+                <td>{{dessert.calories}}</td>
+                <td>{{dessert.fat}}</td>
+                <td>{{dessert.carbs}}</td>
+                <td>{{dessert.protein}}</td>
+              </tr>
+              <mat-divider></mat-divider>
+            </table>
+            <p class="card-text">
+              Cupcake ipsum dolor sit amet. Liquorice gummi bears jelly beans. Macaroon biscuit lollipop soufflé.
+
+              Pastry danish liquorice dessert toffee chocolate cake donut carrot cake cake. Dragée halvah chocolate bar jujubes muffin brownie halvah. Cookie oat cake pie tiramisu.
+
+              Gingerbread macaroon oat cake. Cupcake pudding tart brownie icing toffee brownie icing chocolate bar. Sweet roll bonbon macaroon chocolate bar.</p>
+              <a type="button" class="btn btn-secondary" [routerLink]="['./add']">Add recipe to calendar</a>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+ -->
+
+
+<!-- <div class="row">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-6">
+    <mat-card class="col-sm-4">
+      <img mat-card-image [src]="recipe.imagePath" [alt]="recipe.title" >
+    </mat-card>
+    <mat-card class="col-sm-4">
+      <img mat-card-image [src]="recipe.imagePath" [alt]="recipe.title" >
+    </mat-card>
+    <mat-card class="col-sm-4">
+      <img mat-card-image [src]="recipe.imagePath" [alt]="recipe.title" >
+    </mat-card>
+  </div>
+
+  <mat-card class="col-sm-4">
+    <img mat-card-image [src]="recipe.imagePath" [alt]="recipe.title" >
+    <p>Content</p>
+  </mat-card>
+  <div class="col-sm-1"></div>
+</div> -->
+
+
+

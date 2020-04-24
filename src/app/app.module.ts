@@ -4,14 +4,21 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from "./app.component";
+import { AppRoutingModule } from './app-routing.module';
+
 import { HeaderComponent } from "./header/header.component";
 import { IngredientComponent } from "./ingredient/ingredient.component";
 import { RecipeComponent } from "./recipe/recipe.component";
 import { RecipeCreateComponent } from "./recipe/recipe-create/recipe-create.component";
-import { AppRoutingModule } from './app-routing.module';
 import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -25,9 +32,16 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
   imports: [
     BrowserModule,
     AppRoutingModule,
+
     ReactiveFormsModule,
     HttpClientModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+
+    BrowserAnimationsModule,
+    MatTabsModule,
+    MatSortModule,
+    MatDividerModule,
+    MatTableModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
