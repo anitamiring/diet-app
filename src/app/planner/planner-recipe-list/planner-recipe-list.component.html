@@ -1,0 +1,30 @@
+<div class="row" *ngIf="recipes.length > 0">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-10 mt-3">
+    <div class="card-columns">
+      <div>
+        <div class="card" *ngFor="let recipe of recipes">
+          <h4> {{ recipe.title }}</h4>
+          <hr>
+          <img class="card-img-top" [src]="recipe.imagePath" [alt]="recipe.title">
+          <!-- <p>{{ recipe.content }}</p> -->
+          <hr>
+          <a type="button" class="btn btn-primary" [routerLink]="['./add', recipe.id]">Add to calendar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-1"></div>
+
+</div>
+
+<p *ngIf="recipes.length <= 0">No recipes added yet!</p>
+<hr>
+<div class="row">
+  <div class="col-sm-9"></div>
+  <div class="col-sm-2">
+    <button type="button" class="btn btn-primary" routerLink="/create">Add recipe</button>
+  </div>
+  <div class="col-sm-1"></div>
+</div>

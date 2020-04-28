@@ -6,12 +6,14 @@ import { PlannerRecipeComponent } from './planner-recipe/planner-recipe.componen
 import { PlannerComponent } from './planner.component'
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
+import { PlannerRecipeListComponent } from './planner-recipe-list/planner-recipe-list.component';
 
 
 @NgModule({
   declarations: [
     PlannerRecipeComponent,
-    PlannerComponent
+    PlannerComponent,
+    PlannerRecipeListComponent
   ],
   imports: [
     CommonModule,

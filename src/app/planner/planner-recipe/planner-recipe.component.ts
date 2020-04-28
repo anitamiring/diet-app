@@ -41,7 +41,7 @@ export class PlannerRecipeComponent implements OnInit {
           title: recipeData.title,
           content: recipeData.content,
           imagePath: recipeData.imagePath
-      }
+      } 
     });
   }
 

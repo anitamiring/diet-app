@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-sm-1"></div>
       <div class="col-sm-5">
-        <img class="card-img-top" [src]="recipe.imagePath" [alt]="recipe.title">
+        <img class="card-img-top" [src]="recipe?.imagePath" [alt]="recipe?.title">
       </div>
       <div class="col-sm-5">
         <h4>Cheesecake, 500 kcal</h4>
@@ -51,7 +51,7 @@
           Pastry danish liquorice dessert toffee chocolate cake donut carrot cake cake. Dragée halvah chocolate bar jujubes muffin brownie halvah. Cookie oat cake pie tiramisu.
 
           Gingerbread macaroon oat cake. Cupcake pudding tart brownie icing toffee brownie icing chocolate bar. Sweet roll bonbon macaroon chocolate bar.</p>
-          <button type="button" class="btn btn-secondary">Add recipe to calendar</button>
+          <a type="button" class="btn btn-secondary" [routerLink]="'./add'">Add recipe to calendar</a>
         </div>
         <div class="col-sm-1"></div>
     </div>
