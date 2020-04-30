@@ -14,4 +14,10 @@ export class IngredientService
       .subscribe( ingredientData => console.log(ingredientData));
   }
 
+  getIngredientsList()
+  {
+    this.http.get<{message:string, ingedient:any}>("https://api.nal.usda.gov/fdc/v1/foods/list?api_key=orKjbvmhPBg5rPbhAR36JXT5gSv7dexkaNwVkTrl")
+      .subscribe( ingredientData => console.log(ingredientData));
+  }
+
 }
