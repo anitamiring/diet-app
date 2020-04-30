@@ -23,7 +23,7 @@ export class IngredientComponent implements OnInit {
   constructor(public ingredientService: IngredientService) { }
 
   ngOnInit(): void {
-    this.ingredientService.getIngredientsList();
+    this.ingredientService.getIngredientsListPage();
   }
 
 }

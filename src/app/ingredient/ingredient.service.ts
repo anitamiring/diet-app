@@ -20,4 +20,12 @@ export class IngredientService
       .subscribe( ingredientData => console.log(ingredientData));
   }
 
+  getIngredientsListPage()
+  {
+    this.http.get<{message:string, ingedient:any}>("https://api.nal.usda.gov/fdc/v1/foods/list?dataType=Foundation%2CSR%20Legacy&pageSize=50&pageNumber=100&api_key=orKjbvmhPBg5rPbhAR36JXT5gSv7dexkaNwVkTrl")
+      .subscribe( ingredientData => console.log(ingredientData));
+  }
+
+
+
 }
