@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Ingredient } from './ingredient.model';
+import { IngredientService } from './ingredient.service';
 
 @Component({
   selector: 'app-ingredient',
@@ -19,9 +20,10 @@ export class IngredientComponent implements OnInit {
     carbs: 60
   };
 
-  constructor() { }
+  constructor(public ingredientService: IngredientService) { }
 
   ngOnInit(): void {
+    this.ingredientService.getIngredients();
   }
 
 }
